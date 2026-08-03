@@ -1,0 +1,42 @@
+## Build
+[Bb]in/
+[Oo]bj/
+
+## Visual Studio
+.vs/
+.vscode/
+.idea/
+
+## User-specific files
+*.user
+*.rsuser
+*.suo
+*.userosscache
+*.sln.docstates
+
+## Logs
+*.log
+
+## NuGet
+*.nupkg
+
+## Publish
+publish/
+
+## Local database files
+*.mdf
+*.ldf
+
+## OS files
+.DS_Store
+Thumbs.db
+
+## User Secrets
+secrets.json
+
+## Environment variables
+.env
+.env.*
+
+## Generated files
+TestResults/
