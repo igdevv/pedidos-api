@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using PedidosApi.DTOs.Pedidos;
 using PedidosApi.Services.Interfaces;
+using System.Security.Claims;
 
 namespace PedidosApi.Controllers
 {
@@ -16,7 +18,7 @@ namespace PedidosApi.Controllers
         }
 
         [HttpGet]
-
+        [Authorize]
         public async Task<ActionResult<PedidoDTO>> GetAll()
         {
             var pedidos = await _pedidoService.GetAllAsync();
@@ -61,6 +63,32 @@ namespace PedidosApi.Controllers
                 });
             }
         }
+
+        [HttpGet("mi-identidad")]
+        public IActionResult MiIdentidad()
+        {
+            var usuarioIdTexto = User.FindFirstValue(ClaimTypes.NameIdentifier);
+       
+            if(!int.TryParse(usuarioIdTexto, out int usuarioId))
+            {
+                return Unauthorized();
+            }
+
+            var nombre = User.FindFirstValue(ClaimTypes.Name);
+            var correo = User.FindFirstValue(ClaimTypes.Email);
+            var rol = User.FindFirstValue(ClaimTypes.Role);
+
+            return Ok(new
+            {
+                usuarioId,
+                nombre,
+                correo,
+                rol
+            });
+
+        }
+
+      
     }
 }
 

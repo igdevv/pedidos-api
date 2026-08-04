@@ -116,6 +116,41 @@ namespace PedidosApi.Migrations
                     b.ToTable("Productos");
                 });
 
+            modelBuilder.Entity("PedidosApi.Entities.Usuario", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Correo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("FechaCreacion")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Nombre")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PasswordHash")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Rol")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Correo")
+                        .IsUnique();
+
+                    b.ToTable("Usuarios");
+                });
+
             modelBuilder.Entity("PedidosApi.Entities.DetallePedido", b =>
                 {
                     b.HasOne("PedidosApi.Entities.Pedido", "Pedido")
